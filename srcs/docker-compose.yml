@@ -13,21 +13,21 @@ services:
     networks:
       - network
 
-  #mariadb:
-  #  container_name: mariadb
-  #  build: ./requirements/mariadb
-  #  volumes:
-  #    - mariadb_data:/var/lib/mysql
-  #  env_file:
-  #    - .env
-  #  networks:
-  #    - network
-  #  restart: always
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - network
+    restart: always
 
   wordpress:
     container_name: wordpress
-    #depends_on:
-    #  - mariadb
+    depends_on:
+      - mariadb
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
