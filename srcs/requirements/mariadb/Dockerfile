@@ -8,6 +8,7 @@ RUN apt-get install -y mariadb-server \
 
 # Initialisation du repertoire MySQL
 RUN mkdir -p /var/run/mysql \
+&& mkdir -p /var/run/mysqld \
 && chown -R mysql /var/run/mysqld \
 && chmod 777 /var/run/mysqld
 
