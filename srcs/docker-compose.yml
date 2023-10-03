@@ -1,0 +1,28 @@
+version: '3'
+
+# Declaration des différents services
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - 443:443
+    volumes:
+      - wordpress_data:/var/www/html
+    restart: always
+    networks:
+      - network
+
+# Declaration des volumes
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/adevos/data/wordpress
+      o: bind
+
+# Declaration du reseau
+networks:
+  network:
+    driver: bridge
