@@ -26,5 +26,19 @@ COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
 # Necessaire au demarrage de PHP
 RUN mkdir /run/php
 
+# Install le script et l'execute au lancement du conteneur
+COPY ./tools/create_wordpress.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/create_wordpress.sh
+ENTRYPOINT ["/usr/local/bin/create_wordpress.sh"]
+
+#On se place dans le dossier html
+WORKDIR /var/www/html/
+
+#On monte le port 9000
+EXPOSE 9000
+
+#Lancer PHP FPM en foreground
+CMD ["/usr/sbin/php-fpm7.3", "-F"]
+
 
 

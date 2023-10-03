@@ -13,14 +13,47 @@ services:
     networks:
       - network
 
+  #mariadb:
+  #  container_name: mariadb
+  #  build: ./requirements/mariadb
+  #  volumes:
+  #    - mariadb_data:/var/lib/mysql
+  #  env_file:
+  #    - .env
+  #  networks:
+  #    - network
+  #  restart: always
+
+  wordpress:
+    container_name: wordpress
+    #depends_on:
+    #  - mariadb
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
+
 # Declaration des volumes
 volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/adevos/data/mysql
+      o: bind
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       device: /home/adevos/data/wordpress
       o: bind
+  
 
 # Declaration du reseau
 networks:
