@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update && apt-get -y install \
 	wget \
@@ -21,7 +21,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
   && mv wp-cli.phar /usr/local/bin/wp
 
 # Copier le fichier de config pour PHP
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 
 # Necessaire au demarrage de PHP
 RUN mkdir /run/php
@@ -38,7 +38,7 @@ WORKDIR /var/www/html/
 EXPOSE 9000
 
 #Lancer PHP FPM en foreground
-CMD ["/usr/sbin/php-fpm7.3", "-F"]
+CMD ["/usr/sbin/php-fpm7.4", "-F"]
 
 
 

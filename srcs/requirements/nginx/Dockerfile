@@ -1,4 +1,4 @@
-FROM    debian:buster
+FROM    debian:bullseye
 
 # Installer les dependances necessaires + suppr elements non necessaires.
 RUN apt-get update
